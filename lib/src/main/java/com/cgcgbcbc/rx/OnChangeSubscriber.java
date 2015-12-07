@@ -11,12 +11,16 @@ public class OnChangeSubscriber<T> extends Subscriber<T> {
     private final Observer<T> s;
 
     public OnChangeSubscriber(Subscriber<? super T> s) {
-        this(s, true);
+        this(s, true, true);
     }
 
-    public OnChangeSubscriber(Subscriber<? super T> s, boolean shareSubscriptions) {
+    public OnChangeSubscriber(Subscriber<? super T> s, boolean withFirst) {
+        this(s, withFirst, true);
+    }
+
+    public OnChangeSubscriber(Subscriber<? super T> s, boolean withFirst, boolean shareSubscriptions) {
         super(s, shareSubscriptions);
-        this.s = new OnChangeSerializeObserver<T>(s);
+        this.s = new OnChangeSerializeObserver<T>(s, withFirst);
     }
 
     @Override

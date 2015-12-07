@@ -8,8 +8,11 @@ import rx.Observer;
 public class OnChangeObserver<T> implements Observer<T> {
     private final Observer<? super T> s;
     private T last;
-    public OnChangeObserver(Observer<? super T> s) {
+    private boolean withFirst = true;
+
+    public OnChangeObserver(Observer<? super T> s, boolean withFirst) {
         this.s = s;
+        this.withFirst = withFirst;
     }
     @Override
     public void onCompleted() {
@@ -25,7 +28,9 @@ public class OnChangeObserver<T> implements Observer<T> {
     public void onNext(T t) {
         if (last == null) {
             last = t;
-            s.onNext(t);
+            if (withFirst) {
+                s.onNext(t);
+            }
         } else {
             if (!t.equals(last)) {
                 last = t;
