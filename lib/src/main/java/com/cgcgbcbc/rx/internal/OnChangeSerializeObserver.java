@@ -1,5 +1,6 @@
 package com.cgcgbcbc.rx.internal;
 
+import com.cgcgbcbc.rx.OnChangeSubscriber;
 import rx.Observer;
 import rx.observers.SerializedObserver;
 
@@ -8,7 +9,7 @@ import rx.observers.SerializedObserver;
  */
 public class OnChangeSerializeObserver<T> extends SerializedObserver<T> {
 
-    public OnChangeSerializeObserver(Observer<? super T> s, boolean withFirst) {
-        super(new OnChangeObserver<T>(s, withFirst));
+    public OnChangeSerializeObserver(Observer<? super T> s, boolean withFirst, OnChangeSubscriber.Equal<T> equal) {
+        super(new OnChangeObserver<T>(s, withFirst, equal));
     }
 }
