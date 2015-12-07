@@ -1,3 +1,4 @@
 rootProject.name = 'rx-onchange-subscriber'
 include 'lib'
+include 'example'
 
